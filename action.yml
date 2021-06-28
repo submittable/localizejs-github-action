@@ -1,0 +1,30 @@
+# action.yml
+name: "Localize.js Integration"
+description: "Extract, translate, and PR string translation via Localize.js as a part of a Github Actions workflow."
+inputs:
+  localize-api-key:
+    description: "API key for Localize.js account"
+    required: true
+  localize-project-id:
+    description: "ID for the Localize.js project to translate"
+    required: true
+  file-format:
+    description: "The file format to use in all push and pulls"
+    required: false
+    default: "json"
+  action:
+    description: "The action to perform -- either push or pull"
+    required: true
+  type:
+    description: "The type of translation -- either phrase or glossary"
+    required: false
+    default: "phrase"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.localize-api-key }}
+    - ${{ inputs.localize-project-id }}
+    - ${{ inputs.file-format }}
+    - ${{ inputs.action }}
+    - ${{ inputs.type }}
