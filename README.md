@@ -29,7 +29,7 @@ Default: "phrase"
 ## Example usage
 
 uses: actions/localizejs-github-action@v1
-with:
-localize-api-key: 'API_KEY'
-localize-project-id: 'my-translated-project'
-action: 'pull'
+  with:
+    localize-api-key: 'api_key'
+    localize-project-id: 'my-translated-project'
+    action: 'pull'

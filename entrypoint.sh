@@ -6,9 +6,6 @@ FORMAT=$3
 ACTION=$4
 TYPE=$5
 
-# Extract messages
-npx @idagio/intl-utils extract {$GITHUB_WORKSPACE}/src {$GITHUB_WORKSPACE}/string.json {$GITHUB_WORKSPACE}/babel.config.js
-
 # Install the Localize API
 pip install --ignore-installed localize
 
@@ -22,7 +19,7 @@ pull:
   targets:
   - tl: {$GITHUB_WORKSPACE}/strings/tl.json
   - zh-TW: {$GITHUB_WORKSPACE}/strings/zh-TW.json
-  - zh: {$GITHUB_WORKSPACE}/strings/tl.json
+  - zh: {$GITHUB_WORKSPACE}/strings/zh.json
   - ko: {$GITHUB_WORKSPACE}/strings/ko.json
   - vi: {$GITHUB_WORKSPACE}/strings/vi.json
   - uk: {$GITHUB_WORKSPACE}/strings/uk.json
