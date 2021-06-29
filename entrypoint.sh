@@ -6,6 +6,8 @@ FORMAT=$3
 ACTION=$4
 TYPE=$5
 
+mkdir ~/.localize
+
 echo "
 api:
   project: {$PROJECT_ID}
