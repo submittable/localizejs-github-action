@@ -42,8 +42,8 @@ push:
   - file: {$GITHUB_WORKSPACE}/strings/en.json
 " >> ~/.localize/config.yml
 
-if($ACTION == "push"); then
+if("$ACTION" = "push"); then
   localize push
-elif($ACTION == "push"); then
+elif("$ACTION" = "push"); then
   localize pull
 fi
