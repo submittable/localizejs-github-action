@@ -1,7 +1,8 @@
 # action.yml
 name: "Localize.js Integration"
-icon: book-open
-color: blue
+branding:
+  icon: book-open
+  color: blue
 description: "Extract, translate, and PR string translation via Localize.js as a part of a Github Actions workflow."
 inputs:
   localize-api-key:
