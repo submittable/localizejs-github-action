@@ -5,6 +5,7 @@ PROJECT_ID=$2
 FORMAT=$3
 ACTION=$4
 TYPE=$5
+GITHUB_WORKSPACE=$6
 
 # Install the Localize API
 pip install --ignore-installed localize

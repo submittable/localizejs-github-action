@@ -19,6 +19,9 @@ inputs:
     description: "The type of translation -- either phrase or glossary"
     required: false
     default: "phrase"
+  workspace:
+    description: "The path to the Github workspace"
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -28,3 +31,4 @@ runs:
     - ${{ inputs.file-format }}
     - ${{ inputs.action }}
     - ${{ inputs.type }}
+    - ${{ inputs.workspace }}
