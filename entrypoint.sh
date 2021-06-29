@@ -5,10 +5,6 @@ PROJECT_ID=$2
 FORMAT=$3
 ACTION=$4
 TYPE=$5
-GITHUB_WORKSPACE=$6
-
-# Install the Localize API
-pip install --ignore-installed localize
 
 echo "
 api:
@@ -46,8 +42,8 @@ push:
   - file: {$GITHUB_WORKSPACE}/strings/en.json
 " >> ~/.localize/config.yml
 
-if($ACTION == "push")
+if($ACTION == "push"); then
   localize push
-elif($ACTION == "push")
+elif($ACTION == "push"); then
   localize pull
 fi
