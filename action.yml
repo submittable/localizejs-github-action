@@ -9,9 +9,9 @@ inputs:
     description: "ID for the Localize.js project to translate"
     required: true
   file-format:
-    description: "The file format to use in all push and pulls"
+    description: "The file format to use in all push and pulls-- can be ANDROID_XML, CSV, GETTEXT_PO, JSON, IOS_STRINGS, IOS_STRINGSDICT, PO, RESX, SIMPLE_JSON, XLIFF, XML, YAML, or YML"
     required: false
-    default: "json"
+    default: "SIMPLE_JSON"
   action:
     description: "The action to perform -- either push or pull"
     required: true
