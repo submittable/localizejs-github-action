@@ -22,7 +22,6 @@ pull:
   - ko: $GITHUB_WORKSPACE/strings/ko.json
   - vi: $GITHUB_WORKSPACE/strings/vi.json
   - en-GB: $GITHUB_WORKSPACE/strings/en-GB.json
-  - en: $GITHUB_WORKSPACE/strings/en.json
   - ru: $GITHUB_WORKSPACE/strings/ru.json
   - bs: $GITHUB_WORKSPACE/strings/bs.json
   - hi: $GITHUB_WORKSPACE/strings/hi.json
@@ -42,7 +41,7 @@ pull:
   - pa: $GITHUB_WORKSPACE/strings/pa.json
 push:
   sources:
-  - file: $GITHUB_WORKSPACE/strings/en-US.json
+  - file: $GITHUB_WORKSPACE/strings/en.json
 " >> ~/.localize/config.yml
 
 if [ "$ACTION" = "push" ]; then
