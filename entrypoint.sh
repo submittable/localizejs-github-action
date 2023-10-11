@@ -5,8 +5,14 @@ PROJECT_ID=$2
 FORMAT=$3
 ACTION=$4
 TYPE=$5
+LANGUAGES=$6
+FILEPATHS=$7
+
+LANGUAGES_ARR=$(echo $LANGUAGES | tr "," "\n")
+FILEPATHS_ARR=$(echo $FILEPATHS | tr "," "\n")
 
 mkdir ~/.localize
+mkdir $GITHUB_WORKSPACE/translations/
 
 echo "
 api:
@@ -15,40 +21,25 @@ api:
 format: $FORMAT
 type: $TYPE
 pull:
-  targets:
-  - tl: $GITHUB_WORKSPACE/strings/tl.json
-  - zh-TW: $GITHUB_WORKSPACE/strings/zh-TW.json
-  - zh: $GITHUB_WORKSPACE/strings/zh.json
-  - ko: $GITHUB_WORKSPACE/strings/ko.json
-  - vi: $GITHUB_WORKSPACE/strings/vi.json
-  - en-GB: $GITHUB_WORKSPACE/strings/en-GB.json
-  - ru: $GITHUB_WORKSPACE/strings/ru.json
-  - bs: $GITHUB_WORKSPACE/strings/bs.json
-  - hi: $GITHUB_WORKSPACE/strings/hi.json
-  - ht: $GITHUB_WORKSPACE/strings/ht.json
-  - id: $GITHUB_WORKSPACE/strings/id.json
-  - th: $GITHUB_WORKSPACE/strings/th.json
-  - de: $GITHUB_WORKSPACE/strings/de.json
-  - es: $GITHUB_WORKSPACE/strings/es.json
-  - ar: $GITHUB_WORKSPACE/strings/ar.json
-  - pt: $GITHUB_WORKSPACE/strings/pt.json
-  - ja: $GITHUB_WORKSPACE/strings/ja.json
-  - fr: $GITHUB_WORKSPACE/strings/fr.json
-  - fr-CA: $GITHUB_WORKSPACE/strings/fr-CA.json
-  - haw: $GITHUB_WORKSPACE/strings/haw.json
-  - am: $GITHUB_WORKSPACE/strings/am.json
-  - hmn: $GITHUB_WORKSPACE/strings/hmn.json
-  - pa: $GITHUB_WORKSPACE/strings/pa.json
-push:
-  sources:
-  - file: $GITHUB_WORKSPACE/strings/en.json
-" >> ~/.localize/config.yml
+  targets:" >> ~/.localize/config.yml
+for lang in $LANGUAGES_ARR
+  do
+    echo "  - $lang: $GITHUB_WORKSPACE/translations/$lang.json" >> ~/.localize/config.yml
+  done
+echo "push:
+  sources:" >> ~/.localize/config.yml
+
+for filepath in $FILEPATHS_ARR
+do
+  echo "  - file: $GITHUB_WORKSPACE/$filepath/en.json" >> ~/.localize/config.yml
+done
+
 
 if [ "$ACTION" = "push" ]; then
   localize push
   exit 0
 elif [ "$ACTION" = "pull" ]; then
-  localize pull
+  localize pull 1
   exit 0
 fi
 
