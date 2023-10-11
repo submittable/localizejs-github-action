@@ -39,7 +39,7 @@ if [ "$ACTION" = "push" ]; then
   localize push
   exit 0
 elif [ "$ACTION" = "pull" ]; then
-  localize pull 1
+  localize pull
   exit 0
 fi
 
