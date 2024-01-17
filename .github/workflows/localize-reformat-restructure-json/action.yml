@@ -1,0 +1,24 @@
+# action.yml
+name: "Reformat and restructure JSON files"
+branding:
+  icon: book-open
+  color: blue
+description: "Reformat JSON files to SIMPLE_JSON format, move/rename files to match the $language_code/translation.json structure."
+inputs:
+  languages:
+    description: "A comma separated list languages to use"
+    required: true
+  input-path:
+    description: "Path for files to be input"
+    required: true
+  output-path:
+    description: "Path for files to be written to"
+    required: false
+    default: "public/locales"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.languages }}
+    - ${{ inputs.input-path }}
+    - ${{ inputs.output-path }}
