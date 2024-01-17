@@ -31,3 +31,5 @@ runs:
     - ${{ inputs.file-format }}
     - ${{ inputs.action }}
     - ${{ inputs.type }}
+    - ${{ inputs.languages }}
+    - ${{ inputs.filepaths }}
