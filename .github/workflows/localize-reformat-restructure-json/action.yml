@@ -1,9 +1,9 @@
 # action.yml
-name: "Reformat and restructure JSON files"
+name: "Restructure JSON files"
 branding:
   icon: book-open
   color: blue
-description: "Reformat JSON files to SIMPLE_JSON format, move/rename files to match the $language_code/translation.json structure."
+description: "move and rename files to match the $language_code/translation.json structure."
 inputs:
   languages:
     description: "A comma separated list languages to use"
