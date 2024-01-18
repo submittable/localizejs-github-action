@@ -22,6 +22,12 @@ inputs:
     description: "The type of translation -- either phrase or glossary"
     required: false
     default: "phrase"
+  languages:
+    description: "A comma separated list of desired languages"
+    required: true
+  filepaths:
+    description: "The file path for the input file. Should be a directory without the ending slash"
+    required: true
 runs:
   using: "docker"
   image: "Dockerfile"
