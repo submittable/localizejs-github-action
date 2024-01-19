@@ -17,7 +17,7 @@ inputs:
     default: "public/locales"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "localize-restructure-Dockerfile"
   args:
     - ${{ inputs.languages }}
     - ${{ inputs.input-path }}
