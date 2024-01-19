@@ -11,7 +11,7 @@ for lang in $LANGUAGES_ARR
 do
   mkdir $GITHUB_WORKSPACE/$OUTPUTPATH
   mkdir $GITHUB_WORKSPACE/$OUTPUTPATH/$lang
-  mv $GITHUB_WORKSPACE/$INPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/translation.json
+  mv $GITHUB_WORKSPACE/$INPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translation.json
 done
 
 rm -rf $INPUTPATH
