@@ -42,4 +42,4 @@ runs:
     - ${{ inputs.type }}
     - ${{ inputs.languages }}
     - ${{ inputs.input-path }}
-    - ${{ inputs.output-path}}
+    - ${{ inputs.output-path }}
