@@ -6,13 +6,13 @@ FORMAT=$3
 ACTION=$4
 TYPE=$5
 LANGUAGES=$6
-FILEPATHS=$7
+INPUTPATH=$7
+OUTPUTPATH=$8 # this should be a temp location.
 
 LANGUAGES_ARR=$(echo $LANGUAGES | tr "," "\n")
-FILEPATHS_ARR=$(echo $FILEPATHS | tr "," "\n")
 
 mkdir ~/.localize
-mkdir $GITHUB_WORKSPACE/translations/
+mkdir $GITHUB_WORKSPACE/$OUTPUTPATH
 
 echo "
 api:
@@ -24,15 +24,12 @@ pull:
   targets:" >> ~/.localize/config.yml
 for lang in $LANGUAGES_ARR
   do
-    echo "  - $lang: $GITHUB_WORKSPACE/translations/$lang.json" >> ~/.localize/config.yml
+    echo "  - $lang: $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json" >> ~/.localize/config.yml
   done
 echo "push:
   sources:" >> ~/.localize/config.yml
 
-for filepath in $FILEPATHS_ARR
-do
-  echo "  - file: $GITHUB_WORKSPACE/$filepath/en.json" >> ~/.localize/config.yml
-done
+echo "  - file: $GITHUB_WORKSPACE/$INPUTPATH/en.json" >> ~/.localize/config.yml
 
 
 if [ "$ACTION" = "push" ]; then
@@ -40,6 +37,7 @@ if [ "$ACTION" = "push" ]; then
   exit 0
 elif [ "$ACTION" = "pull" ]; then
   localize pull
+  cp $GITHUB_WORKSPACE/$INPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en.json
   exit 0
 fi
 

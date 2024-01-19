@@ -25,8 +25,11 @@ inputs:
   languages:
     description: "A comma separated list of desired languages"
     required: true
-  filepaths:
-    description: "The file path for the input file. Should be a directory without the ending slash"
+  input-path:
+    description: "The path for the file to be pushed to LocalizeJS"
+    required: true
+  output-path:
+    description: "A temporary output path for the files to pull from LocalizeJS"
     required: true
 runs:
   using: "docker"
@@ -38,4 +41,5 @@ runs:
     - ${{ inputs.action }}
     - ${{ inputs.type }}
     - ${{ inputs.languages }}
-    - ${{ inputs.filepaths }}
+    - ${{ inputs.input-path }}
+    - ${{ inputs.output-path }}
