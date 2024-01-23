@@ -31,6 +31,10 @@ inputs:
   output-path:
     description: "A temporary output path for the files to pull from LocalizeJS"
     required: true
+  restructure-files:
+    description: "If true will restructure files to match the structure expected by i18next. EG `language_code/translations.json`"
+    required: false
+    default: false
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -43,3 +47,4 @@ runs:
     - ${{ inputs.languages }}
     - ${{ inputs.input-path }}
     - ${{ inputs.output-path }}
+    - ${{ inputs.restructure-files }}
