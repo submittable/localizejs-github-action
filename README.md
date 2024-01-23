@@ -58,7 +58,9 @@ Default: 'phrase'
 
 ## `restructure-files`
 
-If true output files will be moved and renamed to the file structure expected by i18next. EG `{output-path}/{language_code}/translations.json`
+If true output files will be moved and renamed to the file structure expected by i18next. Input file will be copied instead of moved. If this option is used the input file should be maintained by developers while the copied version of the input file should be used by code. 
+
+ EG `{output-path}/{language_code}/translations.json`
 
 ## Example usage
 
