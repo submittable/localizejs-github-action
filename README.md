@@ -4,6 +4,9 @@ A Github Actions integration for Localize.js; use it to push the primary string 
 
 ## Inputs
 
+## Input file
+This action uses the LocalizeJS cli application which requires the input file to be named `{source_language_code}.json`. 
+
 ## `localize-api-key`
 
 **Required** The Localize.js account API key
@@ -26,7 +29,7 @@ Options:
 - IOS_STRINGSDICT
 - PO
 - RESX
-- SIMPLE_JSON
+- SIMPLE_JSON (Works with i18next. Not supported by all project types.)
 - XLIFF
 - XML
 - YAML
@@ -41,36 +44,25 @@ Options:
 The type of translation-- either 'phrase' or 'glossary'
 Default: 'phrase'
 
+## `langauges`
+
+**Required** A comma separated list of desired langages. Langauges must first be enabled in the LocalizeJS project.
+
+## `input-path`
+
+**Required** The path to the input file. EG `AccountsFrontend/public/locales`. Path must be a folder containing a file named `en.json`
+
+## `output-path`
+
+**Required** The path to the desired output location. Should be a directory without the end slash. EG `AccountsFrontend/public/locales`
+
+## `restructure-files`
+
+If true output files will be moved and renamed to the file structure expected by i18next. Input file will be copied instead of moved. If this option is used the input file should be maintained by developers while the copied version of the input file should be used by code. 
+
+ EG `{output-path}/{language_code}/translations.json`
+
 ## Example usage
-
-```yml
-uses: actions/localizejs-github-action@v1
-  with:
-    localize-api-key: 'api_key'
-    localize-project-id: 'my-translated-project'
-    action: 'pull'
-```
-
-## Full Publish Workflow
-
-```yml
-name: Localization - Publish strings
-on:
-  push:
-    branches: [main]
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: sammcoe/localizejs-github-action@v1.0
-        with:
-          localize-api-key: ${{ secrets.LOCALIZE_API_KEY }}
-          localize-project-id: [your-project-id]
-          action: "push"
-```
 
 ## Daily fetch workflow
 
@@ -86,11 +78,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: sammcoe/localizejs-github-action@v1.0
+      - uses: submittable/localizejs-github-action/.github/actions/localize-push-pull@main
         with:
           localize-api-key: ${{ secrets.LOCALIZE_API_KEY }}
           localize-project-id: [your-project-id]
+          file-format: "SIMPLE_JSON"
           action: "pull"
+          languages: "fr,es,haw,am,de,ru,cs,el,he,hu,km-KH,ko,lo,pl,vi,zh,zh-TW,ar,bs,fr-CA,hi,id,it,ja,lt,pa,so,th,uk,pt,sr-LA,tl,ht,hmn"
+          input-path: "[path to the directory containing your input file]" # directory must contain en.json
+          output-path: "[desired output path]" # path to directory without end slash. EG: `account-name/strings`
+          restructure-files: true
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
@@ -105,4 +102,29 @@ jobs:
           path: "strings/"
           commit-message: "Updating localized strings with new translations from Localize.js"
           labels: localization
+```
+
+## Example publish workflow
+
+```yml
+name: LocalizationPublishStrings
+on:
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: submittable/localizejs-github-action/.github/actions/localize-push-pull@main
+        with:
+          localize-api-key: ${{ secrets.LOCALIZE_API_KEY }}
+          localize-project-id: [your-project-id]
+          file-format: "SIMPLE_JSON"
+          action: "push"
+          languages: "fr,es,haw,am,de,ru,cs,el,he,hu,km-KH,ko,lo,pl,vi,zh,zh-TW,ar,bs,fr-CA,hi,id,it,ja,lt,pa,so,th,uk,pt,sr-LA,tl,ht,hmn"
+          input-path: "AccountsFrontend/public/locales" #path used as example only. 
+          output-path: "AccountsFrontend/public/locales" #path used as example only. 
 ```
