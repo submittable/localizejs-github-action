@@ -5,7 +5,7 @@ A Github Actions integration for Localize.js; use it to push the primary string 
 ## Inputs
 
 ## Input file
-This action uses the LocalizeJS cli application which requires the input file to be named `language_code.json`. 
+This action uses the LocalizeJS cli application which requires the input file to be named `{source_language_code}.json`. 
 
 ## `localize-api-key`
 
