@@ -46,7 +46,7 @@ Default: 'phrase'
 
 ## `langauges`
 
-**Required** A comma separated list of desired langage codes. Langauges must first be enabled in the LocalizeJS project. **Do not inlcude the source language.**
+**Required** A comma separated list of desired language codes. Languages must first be enabled in the LocalizeJS project. **Do not include the source language.**
 
 ## `input-path`
 
