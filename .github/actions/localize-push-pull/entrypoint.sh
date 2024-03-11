@@ -52,7 +52,9 @@ if [ "$ACTION" = "push" ]; then
 elif [ "$ACTION" = "pull" ]; then
   create_config
   localize pull
-  cp -p $GITHUB_WORKSPACE/$INPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en.json
+  if [ "$INPUTPATH" != "$OUTPUTPATH" ]; then
+    cp -p $GITHUB_WORKSPACE/$INPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en.json
+  fi
   if [ "$RESTRUCTURE" = "true" ]; then
     restructure_files
   fi
