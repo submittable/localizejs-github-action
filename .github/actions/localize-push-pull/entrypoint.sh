@@ -35,14 +35,31 @@ echo "push:
 echo "  - file: $GITHUB_WORKSPACE/$INPUTPATH/en.json" >> ~/.localize/config.yml
 }
 
+alphabetize_keys() {
+  target_file="$1"
+  echo "Sorting keys of $target_file"
+
+  # sort in two steps to account for cosmic rays interrupting inline piped read
+  sorted_json=$(jq --sort-keys '.' $target_file)
+  echo "${sorted_json}" > $target_file
+}
+
 restructure_files() {
   for lang in $LANGUAGES_ARR
     do
       mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/$lang
       mv $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translations.json
+
+      if [ "$ALPHABETIZE" = "true" ]; then
+        alphabetize_keys $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translations.json
+      fi
     done
   mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/en
   cp -p $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
+
+  if [ "$ALPHABETIZE" = "true" ]; then
+    alphabetize_keys $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
+  fi
 }
 
 if [ "$ACTION" = "push" ]; then
@@ -57,6 +74,11 @@ elif [ "$ACTION" = "pull" ]; then
   fi
   if [ "$RESTRUCTURE" = "true" ]; then
     restructure_files
+  elif [ "$ALPHABETIZE" = "true" ]; then
+    # alpha for non-restructured output
+    for lang in $LANGUAGES_ARR; do
+      alphabetize_keys $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json
+    done
   fi
   exit 0
 fi

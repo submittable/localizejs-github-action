@@ -35,6 +35,10 @@ inputs:
     description: "If true will restructure files to match the structure expected by i18next. EG `language_code/translations.json`"
     required: false
     default: "false"
+  alphabetize-keys:
+    description: "If true, recursively alphabetize keys of generated output. This helps reduce diff churn."
+    required: false
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -48,3 +52,4 @@ runs:
     - ${{ inputs.input-path }}
     - ${{ inputs.output-path }}
     - ${{ inputs.restructure-files }}
+    - ${{ inputs.alphabetize-keys }}
