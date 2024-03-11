@@ -42,7 +42,7 @@ restructure_files() {
       mv $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translations.json
     done
     mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/en
-    cp $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
+    cp -p $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
 }
 
 if [ "$ACTION" = "push" ]; then
@@ -52,7 +52,7 @@ if [ "$ACTION" = "push" ]; then
 elif [ "$ACTION" = "pull" ]; then
   create_config
   localize pull
-  cp $GITHUB_WORKSPACE/$INPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en.json
+  cp -p $GITHUB_WORKSPACE/$INPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en.json
   if [ "$RESTRUCTURE" = "true" ]; then
     restructure_files
   fi
