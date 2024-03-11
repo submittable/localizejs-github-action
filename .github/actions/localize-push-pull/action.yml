@@ -34,7 +34,7 @@ inputs:
   restructure-files:
     description: "If true will restructure files to match the structure expected by i18next. EG `language_code/translations.json`"
     required: false
-    default: false
+    default: "false"
 runs:
   using: "docker"
   image: "Dockerfile"
