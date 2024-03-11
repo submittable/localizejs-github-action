@@ -41,8 +41,8 @@ restructure_files() {
       mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/$lang
       mv $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translations.json
     done
-    mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/en
-    cp -p $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
+  mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/en
+  cp -p $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
 }
 
 if [ "$ACTION" = "push" ]; then
