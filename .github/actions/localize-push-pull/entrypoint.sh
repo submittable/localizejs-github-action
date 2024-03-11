@@ -9,11 +9,12 @@ LANGUAGES=$6
 INPUTPATH=$7
 OUTPUTPATH=$8 # this should be a temp location.
 RESTRUCTURE=$9
+ALPHABETIZE=$10
 
 LANGUAGES_ARR=$(echo $LANGUAGES | tr "," "\n")
 
 mkdir ~/.localize
-mkdir $GITHUB_WORKSPACE/$OUTPUTPATH
+mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH
 
 create_config() {
   echo "
@@ -37,10 +38,10 @@ echo "  - file: $GITHUB_WORKSPACE/$INPUTPATH/en.json" >> ~/.localize/config.yml
 restructure_files() {
   for lang in $LANGUAGES_ARR
     do
-      mkdir $GITHUB_WORKSPACE/$OUTPUTPATH/$lang
+      mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/$lang
       mv $GITHUB_WORKSPACE/$OUTPUTPATH/$lang.json $GITHUB_WORKSPACE/$OUTPUTPATH/$lang/translations.json
     done
-    mkdir $GITHUB_WORKSPACE/$OUTPUTPATH/en
+    mkdir -p $GITHUB_WORKSPACE/$OUTPUTPATH/en
     cp $GITHUB_WORKSPACE/$OUTPUTPATH/en.json $GITHUB_WORKSPACE/$OUTPUTPATH/en/translations.json
 }
 
